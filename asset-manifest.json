@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/quantquiz/static/css/main.a5e8840f.css",
+    "main.js": "/quantquiz/static/js/main.363110cd.js",
+    "static/media/React_logo1.png": "/quantquiz/static/media/React_logo1.5a72dd2a07d02a30adfc.png",
+    "index.html": "/quantquiz/index.html",
+    "main.a5e8840f.css.map": "/quantquiz/static/css/main.a5e8840f.css.map",
+    "main.363110cd.js.map": "/quantquiz/static/js/main.363110cd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a5e8840f.css",
+    "static/js/main.363110cd.js"
+  ]
+}
