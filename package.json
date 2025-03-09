@@ -1,5 +1,5 @@
 {
-  "homepage": "https://VINAYAK9669.github.io/React-QuizApp",
+  "homepage": "https://sakskap.github.io/quantquiz/",
   "name": "faraway",
   "version": "0.1.0",
   "private": true,
@@ -41,6 +41,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.3.0"
   }
 }
