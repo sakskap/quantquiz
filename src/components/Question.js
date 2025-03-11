@@ -1,12 +1,23 @@
-import Options from "./Options";
-
-function Question({ question, dispatch, answer }) {
+export default function Question({ question, dispatch, answer }) {
   return (
-    <div className="question_container">
+    <div>
       <h4>{question.question}</h4>
-      <Options question={question} dispatch={dispatch} answer={answer} />
+      <div className="options" role="radiogroup" aria-labelledby={`question-${question.id}`}>
+        {question.options.map((option, i) => (
+          <button
+            key={i}
+            className={`btn btn-option ${answer === i ? "answer" : ""} ${
+              answer !== null && i === question.correctOption ? "correct" : ""
+            }`}
+            onClick={() => dispatch({ type: "newAnswer", payload: i })}
+            disabled={answer !== null}
+            role="radio"
+            aria-checked={answer === i}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
-
-export default Question;

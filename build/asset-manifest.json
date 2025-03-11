@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/quantquiz/static/css/main.715af011.css",
+    "main.css": "/quantquiz/static/css/main.6f318c84.css",
     "main.js": "/quantquiz/static/js/main.28993bcb.js",
     "static/media/React_logo1.png": "/quantquiz/static/media/React_logo1.5a72dd2a07d02a30adfc.png",
     "index.html": "/quantquiz/index.html",
-    "main.715af011.css.map": "/quantquiz/static/css/main.715af011.css.map",
+    "main.6f318c84.css.map": "/quantquiz/static/css/main.6f318c84.css.map",
     "main.28993bcb.js.map": "/quantquiz/static/js/main.28993bcb.js.map"
   },
   "entrypoints": [
-    "static/css/main.715af011.css",
+    "static/css/main.6f318c84.css",
     "static/js/main.28993bcb.js"
   ]
 }

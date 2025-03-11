@@ -24,7 +24,7 @@ html {
 body {
   min-height: 100vh;
   color: var(--color-light);
-  background-color: var(--color-darkest);
+  background-color: var(--color-theme);
   padding: 2rem;
 }
 
@@ -57,10 +57,10 @@ body {
 .app-header {
   width: 90%;
   margin: 0 auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-wrap: wrap;
-  row-gap: 2rem;
+  row-gap: 0rem;
   align-items: center;
   justify-content: center;
   column-gap: 3rem;
@@ -101,9 +101,9 @@ h3 {
 }
 
 h4 {
-  font-size: calc(100vmin - 97vmin);
+  font-size: calc(101vmin - 97vmin);
   font-weight: 600;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2rem;
 }
 
 .start {
@@ -113,11 +113,11 @@ h4 {
 }
 
 .progress {
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
   display: grid;
   justify-content: space-between;
-  gap: 1.2rem;
+  gap: 0.5rem;
   grid-template-columns: auto auto;
   font-size: calc(100vmin - 97vmin);
   color: var(--color-medium);
@@ -126,12 +126,12 @@ h4 {
 progress {
   -webkit-appearance: none;
   width: 100%;
-  height: 6px;
+  height: 2px;
   grid-column: 1 / -1;
 }
 
 ::-webkit-progress-bar {
-  background-color: var(--color-medium);
+  background-color: var(--color-light);
   border-radius: 100px;
 }
 
@@ -195,7 +195,7 @@ progress {
 }
 
 .answer {
-  transform: translateX(2rem);
+  transform: translateX(1rem);
 }
 
 .result_container {
@@ -250,7 +250,7 @@ progress {
 
 /* Timer Styles */
 .timer {
-  font-size: 4rem;
+  font-size: 2.8rem;
   color: var(--color-medium);
   border: 3px solid var(--color-dark);
   padding: 0.8rem 1.6rem;
@@ -264,12 +264,12 @@ progress {
 .btn-skip {
   background-color: #ffa94d;
   color: #fff;
-  font-size: 1.4rem; /* Match timer size */
-  padding: 0.8rem 1.6rem; /* Match timer padding */
+  font-size: 2 rem; /* Match timer size */
+  padding: 0.8rem 1 rem; /* Match timer padding */
   border-radius: 100px;
   border: 2px solid transparent;
   transition: all 0.3s;
-  margin-left: auto; /* Push to right */
+  margin-left: 83%; /* Push to right */
   gap: 2rem;
 }
 
