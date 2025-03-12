@@ -3,7 +3,7 @@ function Header() {
   return (
     <header className="app-header">
       <img src={ReactLogo} alt="Reactlogo" />
-      <h1>GRE Diagnostic Test</h1>
+      <h1>Quant Diagnostic Test</h1>
     </header>
   );
 }

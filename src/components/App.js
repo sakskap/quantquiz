@@ -14,21 +14,30 @@ import "../index.css";
 
 const SECS_PER_QUESTION = 75;
 
+const TEST_SOURCES = {
+  GRE: "https://raw.githubusercontent.com/sakskap/grequiz/refs/heads/main/questions.json",
+  GMAT: "https://raw.githubusercontent.com/sakskap/grequiz/refs/heads/main/questions.json",
+  SAT: "https://raw.githubusercontent.com/sakskap/grequiz/refs/heads/main/questions.json",
+};
+
 const initialState = {
   questions: [],
-  status: "loading",
+  status: "home", // Displays test selection initially.
   index: 0,
   answer: null,
   points: 0,
   highscore: 0,
   secondsRemaining: null,
   answersStatus: [],
-  userAnswers: [], // Store user answers
-  email: "", // Store user's email
+  userAnswers: [],
+  email: "",
+  selectedTest: null,
 };
 
 function reducer(state, action) {
   switch (action.type) {
+    case "selectTest":
+      return { ...state, selectedTest: action.payload, status: "loading" };
     case "dataReceived":
       return {
         ...state,
@@ -51,7 +60,6 @@ function reducer(state, action) {
         action.payload === question.correctOption ? "correct" : "incorrect";
       const newUserAnswers = [...state.userAnswers];
       newUserAnswers[state.index] = action.payload;
-
       return {
         ...state,
         answer: action.payload,
@@ -69,7 +77,6 @@ function reducer(state, action) {
       skippedAnswersStatus[state.index] = "skipped";
       const newUserAnswers = [...state.userAnswers];
       newUserAnswers[state.index] = null;
-
       return {
         ...state,
         index: newIndex,
@@ -99,6 +106,7 @@ function reducer(state, action) {
         questions: state.questions,
         status: "ready",
         answersStatus: new Array(state.questions.length).fill("unanswered"),
+        selectedTest: state.selectedTest,
       };
     case "tick":
       return {
@@ -115,6 +123,39 @@ function reducer(state, action) {
     default:
       throw new Error("Action unknown");
   }
+}
+
+function useQuiz() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  
+  useEffect(() => {
+    if (!state.selectedTest) return;
+    fetch(TEST_SOURCES[state.selectedTest])
+      .then((res) => res.json())
+      .then((data) => dispatch({ type: "dataReceived", payload: data.questions }))
+      .catch(() => dispatch({ type: "dataFailed" }));
+  }, [state.selectedTest]);
+
+  return { state, dispatch };
+}
+
+function HomeScreen({ dispatch }) {
+  return (
+    <div className="home-screen">
+      <h1>Choose Your Test</h1>
+      <div className="test-options">
+        {Object.keys(TEST_SOURCES).map((test) => (
+          <button
+            key={test}
+            className="btn btn-test"
+            onClick={() => dispatch({ type: "selectTest", payload: test })}
+          >
+            {test}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function QuestionsMap({ answersStatus, dispatch, currentIndex }) {
@@ -136,21 +177,6 @@ function QuestionsMap({ answersStatus, dispatch, currentIndex }) {
   );
 }
 
-function useQuiz() {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/sakskap/grequiz/refs/heads/main/questions.json"
-    )
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data.questions }))
-      .catch(() => dispatch({ type: "dataFailed" }));
-  }, []);
-
-  return { state, dispatch };
-}
-
 export default function App() {
   const { state, dispatch } = useQuiz();
   const {
@@ -164,19 +190,23 @@ export default function App() {
     answersStatus,
     userAnswers,
     email,
+    selectedTest,
   } = state;
 
   const numQuestions = questions.length;
-  const maxPossiblePoints = useMemo(() => {
-    return questions.reduce((prev, cur) => prev + cur.points, 0);
-  }, [questions]);
+  const maxPossiblePoints = useMemo(
+    () => questions.reduce((prev, cur) => prev + cur.points, 0),
+    [questions]
+  );
 
   return (
     <div className="wrapper">
       <div className="app">
         <div className="headerWrapper">
-          <Header />
+          {/* Pass selectedTest to Header so it can update its message */}
+          <Header selectedTest={selectedTest} />
           <Main>
+            {status === "home" && <HomeScreen dispatch={dispatch} />}
             {status === "loading" && <Loader />}
             {status === "error" && <Error />}
             {status === "ready" && (
@@ -184,6 +214,7 @@ export default function App() {
             )}
             {status === "active" && (
               <>
+                <h2>{selectedTest} Quiz</h2>
                 <div className="timer-container">
                   <Timer dispatch={dispatch} secondsRemaining={secondsRemaining} />
                 </div>

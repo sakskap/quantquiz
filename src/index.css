@@ -112,6 +112,14 @@ h4 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
+}
+
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .progress {
@@ -365,4 +373,33 @@ progress {
   color: white !important;
 }
 
+.home-screen {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.test-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.btn-test {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  background-color: var(--color-theme);
+  color: white;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.btn-test:hover {
+  background-color: var(--color-dark);
+}
 
